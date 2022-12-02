@@ -116,6 +116,7 @@ func puzzle_2(game []Round) {
 	totalScore := 0
 	for _, round := range game {
 
+		//Player needs to win
 		if round.Player == PlayWin {
 			totalScore += Win
 			switch round.Opponent {
@@ -130,6 +131,7 @@ func puzzle_2(game []Round) {
 
 			}
 
+			//Player needs to draw
 		} else if round.Player == PlayDraw {
 			totalScore += Draw
 			switch round.Opponent {
@@ -144,6 +146,7 @@ func puzzle_2(game []Round) {
 
 			}
 
+			//Player needs to lose
 		} else if round.Player == PlayLose {
 			totalScore += Loss
 			switch round.Opponent {
