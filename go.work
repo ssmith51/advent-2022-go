@@ -3,3 +3,4 @@ go 1.19
 use ./advent-01
 use ./advent-02
 use ./advent-03
+use ./advent-04
