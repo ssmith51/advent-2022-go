@@ -4,3 +4,5 @@ use ./advent-01
 use ./advent-02
 use ./advent-03
 use ./advent-04
+use ./advent-05
+use ./ash
