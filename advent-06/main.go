@@ -18,8 +18,6 @@ func load(filename string) []rune {
 	for scanner.Scan() {
 		line := scanner.Text()
 		runes = []rune(line)
-		// log.Println(runes)
-
 	}
 
 	return runes
@@ -34,7 +32,6 @@ func puzzle_1(markers []rune) {
 	msgLen := 4
 
 	for processed < len(markers) && !start {
-		// log.Println("Round: ", processed, " signal: ", string(markers[processed]))
 
 		packets = append(packets, markers[processed])
 
@@ -64,7 +61,6 @@ func puzzle_2(markers []rune) {
 	msgLen := 14
 
 	for processed < len(markers) && !start {
-		// log.Println("Round: ", processed, " signal: ", string(markers[processed]))
 
 		packets = append(packets, markers[processed])
 
