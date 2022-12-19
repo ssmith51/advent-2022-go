@@ -46,9 +46,10 @@ func parseCrate(line string, stacks map[int][]string) map[int][]string {
 
 	i := 3
 	x := 0
+	stackNum := 1
 	for i <= len(line) {
 		crate := line[x:i]
-		stack := (i % 3) + 1
+		stack := stackNum
 
 		if string(crate[1]) != " " {
 			stacks[stack] = append(stacks[stack], string(crate[1]))
@@ -56,6 +57,7 @@ func parseCrate(line string, stacks map[int][]string) map[int][]string {
 
 		x += 4
 		i += 4
+		stackNum++
 	}
 
 	return stacks
@@ -76,10 +78,66 @@ func parseMove(line string) Move {
 	return move
 }
 
+func puzzle_1(stacks map[int][]string, moves []Move) {
+
+	log.Println("--- Puzzle 1 ---")
+
+	for _, move := range moves {
+		i := 1
+		for i <= move.Amount {
+
+			var newToStack []string
+
+			newToStack = append(newToStack, stacks[move.From][0])
+			newToStack = append(newToStack, stacks[move.To][:]...)
+			stacks[move.To] = newToStack
+			stacks[move.From] = stacks[move.From][1:len(stacks[move.From])]
+			i++
+		}
+	}
+
+	var topRow []string
+	i := 1
+	for i <= len(stacks) {
+		topRow = append(topRow, stacks[i][0])
+		i++
+	}
+
+	log.Printf("Top Row: %s", topRow)
+}
+
+func puzzle_2(stacks map[int][]string, moves []Move) {
+
+	log.Println("--- Puzzle 2 ---")
+	for _, move := range moves {
+		// i := 1
+		// for i <= move.Amount {
+
+		var newToStack []string
+
+		newToStack = append(newToStack, stacks[move.From][0:move.Amount]...)
+		newToStack = append(newToStack, stacks[move.To][:]...)
+		stacks[move.To] = newToStack
+		stacks[move.From] = stacks[move.From][move.Amount:len(stacks[move.From])]
+		// i++
+		// }
+	}
+
+	var topRow []string
+	i := 1
+	for i <= len(stacks) {
+		topRow = append(topRow, stacks[i][0])
+		i++
+	}
+
+	log.Printf("Top Row: %s", topRow)
+
+}
+
 func main() {
 	log.Println("Advent of Code Day 05")
-	stacks, moves := load("test.txt")
+	stacks, moves := load("input.txt")
+	// puzzle_1(stacks, moves)
+	puzzle_2(stacks, moves)
 
-	log.Println(stacks)
-	log.Println(moves)
 }
